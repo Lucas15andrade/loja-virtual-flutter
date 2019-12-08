@@ -49,20 +49,21 @@ class CategoryScreen extends StatelessWidget {
                           crossAxisSpacing: 4.0,
                           childAspectRatio: 0.65),
                       itemBuilder: (context, index) {
-                        return ProductTile(
-                            "grid",
-                            ProductData.fromDocument(
-                                snapshot.data.documents[index]));
+                        ProductData data = ProductData.fromDocument(
+                            snapshot.data.documents[index]);
+                        data.category = this.documentSnapshot.documentID;
+
+                        return ProductTile("grid", data);
                       },
                       itemCount: snapshot.data.documents.length,
                     ),
                     ListView.builder(
                       padding: EdgeInsets.all(4.0),
                       itemBuilder: (context, index) {
-                        return ProductTile(
-                            "list",
-                            ProductData.fromDocument(
-                                snapshot.data.documents[index]));
+                        ProductData data = ProductData.fromDocument(
+                            snapshot.data.documents[index]);
+                        data.category = this.documentSnapshot.documentID;
+                        return ProductTile("list", data);
                       },
                       itemCount: snapshot.data.documents.length,
                     )
